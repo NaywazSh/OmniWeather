@@ -1,2 +1,0 @@
-# OmniWeather
-weather data predictor
