@@ -365,31 +365,64 @@
         }
 
         function initChart() {
-            const ctx = document.getElementById('tempChart').getContext('2d');
-            chartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-                    datasets: [{
-                        label: 'Temperature (°C)',
-                        data: [12, 11, 14, 22, 21, 18],
-                        borderColor: '#00d2ff',
-                        backgroundColor: 'rgba(0, 210, 255, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
+    const ctx = document.getElementById('tempChart').getContext('2d');
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+            datasets: [{
+                label: 'Temp',
+                data: [12, 11, 14, 22, 21, 18],
+                borderColor: '#00d2ff',
+                borderWidth: 2,
+                backgroundColor: (context) => {
+                    const ctx = context.chart.ctx;
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 150);
+                    gradient.addColorStop(0, 'rgba(0, 210, 255, 0.4)');
+                    gradient.addColorStop(1, 'rgba(0, 210, 255, 0.0)');
+                    return gradient;
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { display: false, color: '#334155' }, ticks: { color: '#94a3b8' } },
-                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
-                    }
+                fill: true,
+                pointRadius: 2, // Smaller points
+                pointHoverRadius: 5,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Critical for custom height
+            plugins: { 
+                legend: { display: false },
+                tooltip: { 
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                    titleColor: '#94a3b8',
+                    bodyColor: '#f8fafc'
                 }
-            });
+            },
+            scales: {
+                x: { 
+                    grid: { display: false }, 
+                    ticks: { 
+                        color: '#64748b', 
+                        font: { size: 10 }, // Smaller font
+                        maxRotation: 0 
+                    },
+                    border: { display: false }
+                },
+                y: { 
+                    display: false, // Hide Y axis entirely for a cleaner look
+                    min: 0,
+                    max: 40
+                }
+            },
+            layout: {
+                padding: { left: 0, right: 0, top: 10, bottom: 0 }
+            }
         }
+    });
+}
         
         function updateChartData() {
             // Simulate changing forecast data
