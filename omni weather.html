@@ -147,12 +147,16 @@
                 </div>
             </div>
 
-            <!-- Chart Section -->
-            <div class="widget">
-                <h3><i class="fa-solid fa-chart-line"></i> Temperature Trend (24h)</h3>
-                <canvas id="tempChart" style="height: 200px; width: 100%;"></canvas>
-            </div>
-        </div>
+            <!-- Chart Section (Compact Version) -->
+<div class="widget" style="padding: 1rem; min-height: auto;">
+    <h3 style="font-size: 1.1rem; margin-bottom: 5px; border-bottom: none;">
+        <i class="fa-solid fa-chart-line"></i> Temperature Trend
+    </h3>
+    <!-- Constrain the height here -->
+    <div style="height: 130px; width: 100%; position: relative;">
+        <canvas id="tempChart"></canvas>
+    </div>
+</div>
 
         <!-- Sidebar: Commerce & Travel -->
         <div class="sidebar">
